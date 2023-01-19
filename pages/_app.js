@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
     <title>NodeBird</title>
   </Head>
   <div>공통메뉴</div>
-  <Component {...pageProps} />
+  <Component {...pageProps} /> 
   </>
   )
 }
