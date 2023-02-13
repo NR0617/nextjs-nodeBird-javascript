@@ -14,4 +14,7 @@
 -   npm install
 -   npm run dev
 
-##
+## Blog
+- https://velog.io/@nara20210617/FE-React-NodeBird-리뉴얼-정리2
+- https://velog.io/@nara20210617/series/react-nodebird-front
+
