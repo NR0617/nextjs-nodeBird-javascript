@@ -1,10 +1,17 @@
-import AppLayout from '../components/AppLayout'
+import React from "react";
+import AppLayout from "../components/AppLayout";
+import Head from "next/head";
 
-
-export default function Home() {
-  return (
-    <AppLayout>
-    <div>홈</div>
-    </AppLayout>
-    )
-  }
+const Home = () => {
+    return (
+        <>
+            <Head>
+                <title>홈|노드버드</title>
+            </Head>
+            <AppLayout>
+                <div>Hello, Nextjs!</div>
+            </AppLayout>
+        </>
+    );
+};
+export default Home;

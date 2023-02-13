@@ -1,23 +1,20 @@
-//모든 부분에 공통
-import Head from 'next/head';
-import PropTypes from 'prop-types';
-import 'antd/dist/antd.css';
+import React from "react";
+import "antd/dist/antd.css";
+import PropTypes from "prop-types";
+import Head from "next/head";
 
-function MyApp({ Component, pageProps }) {
-  return( 
-  <>
-  <Head>
-    <meta charSet='utf-8' />
-    <title>NodeBird</title>
-  </Head>
-  <div>공통메뉴</div>
-  <Component {...pageProps} /> 
-  </>
-  )
-}
-
-MyApp.propTypes = {
-  Component: PropTypes.elementType.isRequired,
-}
-
-export default MyApp
+const NodeBird = ({ Component }) => {
+    return (
+        <>
+            <Head>
+                <meta charSet="utf-8" />
+                <title>노드버드</title>
+            </Head>
+            <Component />
+        </>
+    );
+};
+NodeBird.propTypes = {
+    Component: PropTypes.elementType.isRequired,
+};
+export default NodeBird;
