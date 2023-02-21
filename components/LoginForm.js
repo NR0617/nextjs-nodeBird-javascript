@@ -4,6 +4,8 @@ import { Form, Input, Button } from "antd";
 import Link from "next/link";
 import styled from "styled-components";
 import useInput from "../hooks/useInput";
+import { useDispatch } from "react-redux";
+import { loginAction } from "../reducers";
 
 const ButtonWrapper = styled.div`
     //여기는 CSS적듯이 적어주면 된다
@@ -13,7 +15,8 @@ const FormWrapper = styled(Form)`
     padding: 10px;
 `;
 
-const LoginForm = ({ setIsLoggedIn }) => {
+const LoginForm = () => {
+    const dispatch = useDispatch();
     const [id, onChangeId] = useInput("");
     const [password, onChangePassword] = useInput("");
     //const style = useMemo(() => ({ matginTOp: 10 }), []); //리렌더링 돼도 같은 객체가 유지
@@ -21,7 +24,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
     const onSubmitForm = useCallback(() => {
         //antd는 이미 e.preventDefault가 적용되어있다
         console.log(id, password);
-        setIsLoggedIn(true);
+        dispatch(loginAction({ id, password }));
     }, [id, password]);
 
     return (
