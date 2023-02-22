@@ -1,11 +1,11 @@
 import React, { useCallback } from "react";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 import { Form, Input, Button } from "antd";
 import Link from "next/link";
 import styled from "styled-components";
 import useInput from "../hooks/useInput";
 import { useDispatch } from "react-redux";
-import { loginAction } from "../reducers";
+import { loginAction } from "../reducers/user";
 
 const ButtonWrapper = styled.div`
     //여기는 CSS적듯이 적어주면 된다
@@ -65,7 +65,8 @@ const LoginForm = () => {
         </FormWrapper>
     );
 };
-LoginForm.propTypes = {
-    setIsLoggedIn: PropTypes.func.isRequired,
-};
+// redux 쓰면 props를 받지 않아도 되기 떄문에 이부분은 없어도 된다
+// LoginForm.propTypes = {
+//     setIsLoggedIn: PropTypes.func.isRequired,
+// };
 export default LoginForm;

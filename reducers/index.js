@@ -1,26 +1,23 @@
-const initialState = {
-    user: {
-        isLoggedIn: false,
-        user: null,
-        signUpDate: {},
-        loginData: {},
-    },
-    post: {
-        mainPosts: [],
-    },
-};
+import { HYDRATE } from "next-redux-wrapper";
+import { combineReducers } from "redux";
+import user from "./user";
+import post from "./post";
 
-export const loginAction = () => {
-    return {
-        type: "LOG_IN",
-        data,
-    };
-};
-export const logoutAction = () => {
-    return {
-        type: "LOG_IN",
-    };
-};
+// (이전상태, 액션) => 다음상태를 만들어내는 함수가 reducer
+const rootReducer = combineReducers({
+    //user, post는 initialState에 이름을 맞춰서 reducer를 넣은 것, index는 HYDRATE를 위해서 넣은 것(서버사이드렌더링)
+    index: (state = {}, action) => {
+        switch (action.type) {
+            case HYDRATE:
+                console.log("HYDRATE", action);
+                return { ...state, ...action.payload };
+            default:
+                return state;
+        }
+    },
+    user,
+    post,
+});
 
 // 액션 만들기 -> 비효율적 -> 동적액션을 만들어 주자 -> 액션을 만들어주는 함수를 만들어주자
 // const changeNickname1 = {
@@ -56,33 +53,5 @@ export const logoutAction = () => {
 //         data,
 //     };
 // };
-
-// (이전상태, 액션) => 다음상태를 만들어내는 함수가 reducer
-const rootReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case "LOG_IN":
-            return {
-                ...state, //initialState다
-                user: {
-                    ...state.user,
-                    isLoggedIn: true,
-                    user: action.data,
-                },
-            };
-        case "LOG_OUT":
-            return {
-                ...state,
-                user: {
-                    ...state.user,
-                    isLoggedIn: false,
-                    user: null,
-                },
-            };
-        // 아래처럼 하면 참조관계가 유지돼서 히스토리가 안 남으므로 이렇게 하면 안된다!
-        // case 'CHANGE_NICKNAME':
-        // state.name = 'boogicho'
-        // break;
-    }
-};
 
 export default rootReducer;
