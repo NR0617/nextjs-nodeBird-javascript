@@ -9,13 +9,13 @@ export const initialState = {
             content: "첫 번째 게시글 #해시태그 #익스프레스",
             Images: [
                 {
-                    src: "https://cdn.pixabay.com/photo/2023/01/23/09/26/cat-7738210_1280.jpg",
+                    src: "https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_640.jpg",
                 },
                 {
                     src: "https://cdn.pixabay.com/photo/2023/01/22/13/46/swans-7736415_640.jpg",
                 },
                 {
-                    src: "https://cdn.pixabay.com/photo/2023/02/14/18/55/flowers-7790227__480.jpg",
+                    src: "https://cdn.pixabay.com/photo/2023/02/14/18/55/flowers-7790227_640.jpg",
                 },
             ],
             Comments: [
@@ -55,13 +55,13 @@ const dummyPost = {
             content: "첫 번째 게시글 #해시태그 #익스프레스",
             Images: [
                 {
-                    src: "https://cdn.pixabay.com/photo/2023/01/23/09/26/cat-7738210_1280.jpg",
+                    src: "https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_640.jpg",
                 },
                 {
                     src: "https://cdn.pixabay.com/photo/2023/01/22/13/46/swans-7736415_640.jpg",
                 },
                 {
-                    src: "https://cdn.pixabay.com/photo/2023/02/14/18/55/flowers-7790227__480.jpg",
+                    src: "https://cdn.pixabay.com/photo/2023/02/14/18/55/flowers-7790227_640.jpg",
                 },
             ],
             Comments: [],
