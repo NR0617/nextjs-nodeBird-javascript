@@ -38,11 +38,14 @@ export const initialState = {
     postAdded: false,
 };
 
-const ADD_POST = "ADD_POST"; //상수를 변수로 뺴주면 좋은점 -> 재활용 가능&오타방지
+const ADD_POST_REQUEST = "ADD_POST_REQUEST"; //상수를 변수로 뺴주면 좋은점 -> 재활용 가능&오타방지
+const ADD_POST_SUCCESS = "ADD_POST_SUCCESS";
+const ADD_POST_FAILURE = "ADD_POST_FAILURE";
 
-export const addPost = {
-    type: ADD_POST,
-};
+export const addPost = (data) => ({
+    type: ADD_POST_REQUEST,
+    data,
+});
 
 const dummyPost = {
     mainPosts: [
@@ -73,12 +76,18 @@ const dummyPost = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST_REQUEST:
+            return {
+                ...state,
+            };
+        case ADD_POST_SUCCESS:
             return {
                 ...state,
                 mainPosts: [...dummyPost.mainPosts, ...state.mainPosts],
                 postAdded: true,
             };
+        case ADD_POST_FAILURE:
+            return {};
         default:
             return state;
     }
