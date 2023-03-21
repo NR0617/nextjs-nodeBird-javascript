@@ -27,7 +27,7 @@ const Global = createGlobalStyle`
     }
 `;
 const AppLayout = ({ children }) => {
-    const { isLoggedIn } = useSelector((state) => state.user); // isLoggedIn이 바뀌면 이 컴포넌트가 리렌더링된다
+    const { logInDone } = useSelector((state) => state.user); // isLoggedIn이 바뀌면 이 컴포넌트가 리렌더링된다
     return (
         <div>
             <Global />
@@ -53,7 +53,7 @@ const AppLayout = ({ children }) => {
             </Menu>
             <Row gutter={8}>
                 <Col xs={24} md={6}>
-                    {isLoggedIn ? <UserProfile /> : <LoginForm />}
+                    {logInDone ? <UserProfile /> : <LoginForm />}
                 </Col>
                 <Col xs={24} md={12}>
                     {children}

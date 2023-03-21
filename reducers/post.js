@@ -35,14 +35,28 @@ export const initialState = {
         },
     ],
     ImagePaths: [],
-    postAdded: false,
+    addPostLoading: false,
+    addPostDone: false,
+    addPostError: null,
 };
 
-const ADD_POST = "ADD_POST"; //상수를 변수로 뺴주면 좋은점 -> 재활용 가능&오타방지
+const ADD_POST_REQUEST = "ADD_POST_REQUEST"; //상수를 변수로 뺴주면 좋은점 -> 재활용 가능&오타방지
+const ADD_POST_SUCCESS = "ADD_POST_SUCCESS";
+const ADD_POST_FAILURE = "ADD_POST_FAILURE";
 
-export const addPost = {
-    type: ADD_POST,
-};
+const ADD_COMMENT_REQUEST = "ADD_COMMENT_REQUEST";
+const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS";
+const ADD_COMMENT_FAILURE = "ADD_COMMENT_FAILURE";
+
+export const addPost = (data) => ({
+    type: ADD_POST_REQUEST,
+    data,
+});
+
+export const addComment = (data) => ({
+    type: ADD_COMMENT_REQUEST,
+    data,
+});
 
 const dummyPost = {
     mainPosts: [
@@ -73,11 +87,45 @@ const dummyPost = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST_REQUEST:
+            return {
+                ...state,
+                addPostLoading: true,
+                addPostDone: false,
+                addPostError: null,
+            };
+        case ADD_POST_SUCCESS:
             return {
                 ...state,
                 mainPosts: [...dummyPost.mainPosts, ...state.mainPosts],
-                postAdded: true,
+                addPostLoading: false,
+                addPostDone: true,
+            };
+        case ADD_POST_FAILURE:
+            return {
+                ...state,
+                addPostLoading: false,
+                addPostError: action.error,
+            };
+        case ADD_COMMENT_REQUEST:
+            return {
+                ...state,
+                addPostLoading: true,
+                addPostDone: false,
+                addPostError: null,
+            };
+        case ADD_COMMENT_SUCCESS:
+            return {
+                ...state,
+                mainPosts: [...dummyPost.mainPosts, ...state.mainPosts],
+                addPostLoading: false,
+                addPostDone: true,
+            };
+        case ADD_COMMENT_FAILURE:
+            return {
+                ...state,
+                addPostLoading: false,
+                addPostError: action.error,
             };
         default:
             return state;
