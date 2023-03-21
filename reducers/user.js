@@ -52,14 +52,12 @@ const dummyUser = (data) => ({
 });
 
 export const loginRequestAction = (data) => {
-export const loginRequestAction = (data) => {
     return {
         type: LOG_IN_REQUEST,
         type: LOG_IN_REQUEST,
         data,
     };
 };
-export const logoutRequestAction = () => {
 export const logoutRequestAction = () => {
     return {
         type: LOG_OUT_REQUEST,
