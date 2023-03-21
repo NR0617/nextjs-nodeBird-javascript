@@ -8,6 +8,15 @@ export const initialState = {
     signUpLoading: false, //회원가입 시도중
     signUpDone: false,
     signUpError: null,
+    logInLoading: false, //로그인 시도중
+    logInDone: false,
+    logInError: null,
+    logOutLoading: false, //로그아웃 시도중
+    logOutDone: false,
+    logOutError: null,
+    signUpLoading: false, //회원가입 시도중
+    signUpDone: false,
+    signUpError: null,
     me: null,
     signUpDate: {},
     loginData: {},
@@ -43,19 +52,39 @@ const dummyUser = (data) => ({
 });
 
 export const loginRequestAction = (data) => {
+export const loginRequestAction = (data) => {
     return {
+        type: LOG_IN_REQUEST,
         type: LOG_IN_REQUEST,
         data,
     };
 };
 export const logoutRequestAction = () => {
+export const logoutRequestAction = () => {
     return {
+        type: LOG_OUT_REQUEST,
         type: LOG_OUT_REQUEST,
     };
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case LOG_IN_REQUEST:
+            console.log("reducer action");
+            return {
+                ...state, //initialState다
+                logInLoading: true, // 진짜 내가 바꾸고 싶은 부분
+                logInError: null,
+                logInDone: false,
+            };
+        case LOG_IN_SUCCESS:
+            return {
+                ...state, //initialState다
+                logInLoading: false, // 진짜 내가 바꾸고 싶은 부분
+                logInDone: true,
+                me: dummyUser(action.data), //진짜 내가 바꾸고 싶은 부분
+            };
+        case LOG_IN_FAILURE:
         case LOG_IN_REQUEST:
             console.log("reducer action");
             return {

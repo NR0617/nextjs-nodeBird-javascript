@@ -127,6 +127,8 @@ const reducer = (state = initialState, action) => {
                 addPostLoading: false,
                 addPostError: action.error,
             };
+        case ADD_POST_FAILURE:
+            return {};
         default:
             return state;
     }
