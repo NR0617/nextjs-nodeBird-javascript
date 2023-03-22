@@ -2,14 +2,27 @@ import React, { useCallback } from "react";
 import { Form, Input, Button } from "antd";
 import useInput from "../hooks/useInput";
 import propTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { ADD_COMMENT_REQUEST } from "../reducers/post";
 
 const CommentForm = ({ post }) => {
+    const dispatch = useDispatch();
     const id = useSelector((state) => state.user.me?.id); //로그인 안했으면 me가 없기 때문에 없는 경우를 항상 대비
-    const [commentText, onChangeCommentText] = useInput("");
+    const { addCommentDone } = useSelector((state) => state.post);
+    const [commentText, onChangeCommentText, setCommentText] = useInput("");
+
+    useEffect(() => {
+        if (addCommentDone) {
+            setCommentText("");
+        }
+    }, [addCommentDone]);
+
     const onSubmitComment = useCallback(() => {
-        console.log(post.id, commentText);
-    }, [commentText]);
+        dispatch({
+            type: ADD_COMMENT_REQUEST,
+            data: { content: commentText, postId: post.id, userId: id },
+        });
+    }, [commentText, id]);
     return (
         <Form onFinish={onSubmitComment}>
             <Form.Item style={{ position: "relative", margin: 0 }}>

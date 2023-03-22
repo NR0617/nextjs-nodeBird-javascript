@@ -38,15 +38,18 @@ export const initialState = {
     addPostLoading: false,
     addPostDone: false,
     addPostError: null,
+    addCommentLoading: false,
+    addCommentDone: false,
+    addCommentError: null,
 };
 
-const ADD_POST_REQUEST = "ADD_POST_REQUEST"; //상수를 변수로 뺴주면 좋은점 -> 재활용 가능&오타방지
-const ADD_POST_SUCCESS = "ADD_POST_SUCCESS";
-const ADD_POST_FAILURE = "ADD_POST_FAILURE";
+export const ADD_POST_REQUEST = "ADD_POST_REQUEST"; //상수를 변수로 뺴주면 좋은점 -> 재활용 가능&오타방지
+export const ADD_POST_SUCCESS = "ADD_POST_SUCCESS";
+export const ADD_POST_FAILURE = "ADD_POST_FAILURE";
 
-const ADD_COMMENT_REQUEST = "ADD_COMMENT_REQUEST";
-const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS";
-const ADD_COMMENT_FAILURE = "ADD_COMMENT_FAILURE";
+export const ADD_COMMENT_REQUEST = "ADD_COMMENT_REQUEST";
+export const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS";
+export const ADD_COMMENT_FAILURE = "ADD_COMMENT_FAILURE";
 
 export const addPost = (data) => ({
     type: ADD_POST_REQUEST,
@@ -58,32 +61,16 @@ export const addComment = (data) => ({
     data,
 });
 
-const dummyPost = {
-    mainPosts: [
-        {
-            id: 2,
-            User: {
-                id: 1,
-                nickname: "제로초",
-            },
-            content: "첫 번째 게시글 #해시태그 #익스프레스",
-            Images: [
-                {
-                    src: "https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_640.jpg",
-                },
-                {
-                    src: "https://cdn.pixabay.com/photo/2023/01/22/13/46/swans-7736415_640.jpg",
-                },
-                {
-                    src: "https://cdn.pixabay.com/photo/2023/02/14/18/55/flowers-7790227_640.jpg",
-                },
-            ],
-            Comments: [],
-        },
-    ],
-    ImagePaths: [],
-    postAdded: false,
-};
+const dummyPost = (data) => ({
+    id: 2,
+    User: {
+        id: 1,
+        nickname: "제로초",
+    },
+    content: data,
+    Images: [],
+    Comments: [],
+});
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -97,7 +84,7 @@ const reducer = (state = initialState, action) => {
         case ADD_POST_SUCCESS:
             return {
                 ...state,
-                mainPosts: [...dummyPost.mainPosts, ...state.mainPosts],
+                mainPosts: [dummyPost(action.data), ...state.mainPosts],
                 addPostLoading: false,
                 addPostDone: true,
             };

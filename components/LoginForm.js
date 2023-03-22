@@ -18,25 +18,26 @@ const FormWrapper = styled(Form)`
 const LoginForm = () => {
     const dispatch = useDispatch();
     const { logInLoading } = useSelector((state) => state.user);
-    const [id, onChangeId] = useInput("");
+    const [email, onChangeEmail] = useInput("");
     const [password, onChangePassword] = useInput("");
     //const style = useMemo(() => ({ matginTOp: 10 }), []); //리렌더링 돼도 같은 객체가 유지
 
     const onSubmitForm = useCallback(() => {
         //antd는 이미 e.preventDefault가 적용되어있다
-        console.log(id, password);
-        dispatch(loginRequestAction({ id, password }));
-    }, [id, password]);
+        console.log(email, password);
+        dispatch(loginRequestAction({ email, password }));
+    }, [email, password]);
 
     return (
         <FormWrapper onFinish={onSubmitForm}>
             <div>
-                <label htmlFor="user-id">아이디</label>
+                <label htmlFor="user-email">이메일</label>
                 <br />
                 <Input
-                    name="user-id"
-                    value={id}
-                    onChange={onChangeId}
+                    name="user-email"
+                    type="email"
+                    value={email}
+                    onChange={onChangeEmail}
                     required
                 />
             </div>

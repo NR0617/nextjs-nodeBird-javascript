@@ -17,6 +17,9 @@ export const initialState = {
     signUpLoading: false, //회원가입 시도중
     signUpDone: false,
     signUpError: null,
+    changeNicknameLoading: false, //닉네임 변경 시도중
+    changeNicknameDone: false,
+    changeNicknameError: null,
     me: null,
     signUpDate: {},
     loginData: {},
@@ -34,6 +37,10 @@ export const SIGN_UP_REQUEST = "SIGN_UP_REQUEST";
 export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
 export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE";
 
+export const CHANGE_NICKNAME_REQUEST = "CHANGE_NICKNAME_REQUEST";
+export const CHANGE_NICKNAME_SUCCESS = "CHANGE_NICKNAME_SUCCESS";
+export const CHANGE_NICKNAME_FAILURE = "CHANGE_NICKNAME_FAILURE";
+
 export const FOLLOW_REQUEST = "FOLLOW_REQUEST";
 export const FOLLOW_SUCCESS = "FOLLOW_SUCCESS";
 export const FOLLOW_FAILURE = "FOLLOW_FAILURE";
@@ -43,7 +50,7 @@ export const UNFOLLOW_SUCCESS = "UNFOLLOW_SUCCESS";
 export const UNFOLLOW_FAILURE = "UNFOLLOW_FAILURE";
 
 const dummyUser = (data) => ({
-    ...data, //email, password가 들어있ek
+    ...data, //email, password가 들어있다
     nickname: "제로초",
     id: 1,
     Posts: [],
@@ -68,23 +75,6 @@ export const logoutRequestAction = () => {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case LOG_IN_REQUEST:
-            console.log("reducer action");
-            return {
-                ...state, //initialState다
-                logInLoading: true, // 진짜 내가 바꾸고 싶은 부분
-                logInError: null,
-                logInDone: false,
-            };
-        case LOG_IN_SUCCESS:
-            return {
-                ...state, //initialState다
-                logInLoading: false, // 진짜 내가 바꾸고 싶은 부분
-                logInDone: true,
-                me: dummyUser(action.data), //진짜 내가 바꾸고 싶은 부분
-            };
-        case LOG_IN_FAILURE:
-        case LOG_IN_REQUEST:
-            console.log("reducer action");
             return {
                 ...state, //initialState다
                 logInLoading: true, // 진짜 내가 바꾸고 싶은 부분
@@ -143,6 +133,25 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 signUpLoading: false,
                 signUpError: action.error,
+            };
+        case CHANGE_NICKNAME_REQUEST:
+            return {
+                ...state,
+                changeNicknameLoading: true,
+                changeNicknameDone: false,
+                changeNicknametError: null,
+            };
+        case CHANGE_NICKNAME_SUCCESS:
+            return {
+                ...state,
+                changeNicknameLoading: false,
+                changeNicknameDone: true,
+            };
+        case CHANGE_NICKNAME_FAILURE:
+            return {
+                ...state,
+                changeNicknameLoading: false,
+                changeNicknameError: action.error,
             };
         default:
             return state;
