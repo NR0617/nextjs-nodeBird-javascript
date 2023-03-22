@@ -5,7 +5,9 @@ import { addPost } from "../reducers/post";
 import useInput from "../hooks/useInput";
 
 const PostForm = () => {
-    const { ImagePaths, addPostDone } = useSelector((state) => state.post);
+    const { ImagePaths, addPostDone, addPostLoading } = useSelector(
+        (state) => state.post
+    );
     const dispatch = useDispatch();
     const [text, onChangeText, setText] = useInput("");
 
@@ -42,6 +44,7 @@ const PostForm = () => {
                     type="primary"
                     style={{ float: "right" }}
                     htmlType="submit"
+                    loading={addPostLoading}
                 >
                     짹짹
                 </Button>

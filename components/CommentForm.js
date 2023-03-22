@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Form, Input, Button } from "antd";
 import useInput from "../hooks/useInput";
 import propTypes from "prop-types";
@@ -8,7 +8,9 @@ import { ADD_COMMENT_REQUEST } from "../reducers/post";
 const CommentForm = ({ post }) => {
     const dispatch = useDispatch();
     const id = useSelector((state) => state.user.me?.id); //로그인 안했으면 me가 없기 때문에 없는 경우를 항상 대비
-    const { addCommentDone } = useSelector((state) => state.post);
+    const { addCommentDone, addCommentLoading } = useSelector(
+        (state) => state.post
+    );
     const [commentText, onChangeCommentText, setCommentText] = useInput("");
 
     useEffect(() => {
@@ -32,9 +34,15 @@ const CommentForm = ({ post }) => {
                     rows={4}
                 />
                 <Button
-                    style={{ position: "absolute", right: 0, bottom: -40 }}
+                    style={{
+                        position: "absolute",
+                        right: 0,
+                        bottom: -40,
+                        zIndex: 1,
+                    }}
                     type="primary"
                     htmlType="submit"
+                    loading={addCommentLoading}
                 >
                     삐약
                 </Button>
